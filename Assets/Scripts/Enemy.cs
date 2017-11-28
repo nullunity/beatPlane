@@ -11,7 +11,7 @@ public enum EnemyType
 public class Enemy : MonoBehaviour {
     public int hp = 1;
     public float speed = 2;
-    public float score = 100;
+    public int score = 100;
     public EnemyType type = EnemyType.enemy0;
     public bool isDeath = false;
     public Sprite[] explosionSprites; //死亡爆炸动画的数组
@@ -71,17 +71,24 @@ public class Enemy : MonoBehaviour {
 
 	}
 
-    public void BeHit()
+    public void BeHit()  //被子弹击中之后  
     {
         hp -= 1;   //减少血量
         if (hp <= 0)   //判断敌人有没有死
-            isDeath = true;     //如果死了，就播放死亡动画
+            toDie();     //如果死了，就播放死亡动画
         else
         {
             hitTimer = resetHitTime;  //如果没有死，就播放受伤动画
         }
     }
 
-
+    private void toDie()
+    {
+        if(!isDeath)
+        {
+            isDeath = true;
+            GameManager._instance.score += score;
+        }
+    }
 
 }

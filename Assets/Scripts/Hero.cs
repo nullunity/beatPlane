@@ -38,7 +38,7 @@ public class Hero : MonoBehaviour {
             isMouseDown = false;
             lastMousePosition = Vector3.zero;
         }
-        if (isMouseDown)
+        if (isMouseDown&&GameManager._instance.gameState==GameState.Runing)
         {
             if(lastMousePosition!=Vector3.zero)
             {
